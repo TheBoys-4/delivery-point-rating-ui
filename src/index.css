@@ -1,6 +1,7 @@
 * {
   margin: 0;
   font-family: "TT Firs Neue", serif;
+  box-sizing: border-box;
 }
 
 @font-face {
