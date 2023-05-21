@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Logo } from "../../shared/assets";
+import './Header.scss'
 
 export const Header: FC = () => {
     return <header className="mainHeader">
