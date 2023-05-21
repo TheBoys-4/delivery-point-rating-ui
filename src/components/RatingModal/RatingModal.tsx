@@ -23,6 +23,7 @@ export const RatingModal = () => {
       style={{
         width: "100%",
         display: "flex",
+          paddingTop: '56px',
         flexDirection: "column",
         alignItems: "center",
       }}
