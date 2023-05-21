@@ -1,3 +1,8 @@
 .main {
-  width: 1200px
+  width: calc(100vw - 32px);
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  height: 100vh;
+  background: linear-gradient(180deg, #D3D9E3 0%, rgba(225, 230, 237, 0) 100%) no-repeat;
 }
