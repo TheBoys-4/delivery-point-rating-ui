@@ -1,17 +1,17 @@
 import React from "react";
 import "./App.css";
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { Rating } from "./pages/Rating";
-import { Header } from "./components/Header";
-import { VortexBox } from "./components/VortexBox";
-import { RatingModal } from "./components/RatingModal";
+import { paths } from "./shared/constants";
 
 function App() {
   return (
-    <Rating>
-      <Header />
-      <RatingModal />
-        <VortexBox />
-    </Rating>
+      <BrowserRouter>
+        <Routes>
+            <Route path={paths.MAIN} element={<Rating />} />
+            <Route path="*" element={<div><h1>Страница не найдена</h1></div>} />
+        </Routes>
+      </BrowserRouter>
   );
 }
 
