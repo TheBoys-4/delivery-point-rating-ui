@@ -1,11 +1,14 @@
-import React from "react";
-import { Space, Image, Input, Rate, Tag, Button } from "antd";
+import React, {useState} from "react";
+import {Space, Image, Input, Rate, Tag, Button, RateProps} from "antd";
 import {
   SmileOutlined,
   ExclamationCircleOutlined,
   FrownOutlined,
   MehOutlined,
 } from "@ant-design/icons";
+import './RatingModal.scss';
+import {commentExamples, productList} from "./constants";
+import {randomIntFromInterval} from "../../shared/helpers";
 
 const customIcons: Record<number, React.ReactNode> = {
   1: <FrownOutlined />,
@@ -15,109 +18,48 @@ const customIcons: Record<number, React.ReactNode> = {
   5: <SmileOutlined />,
 };
 
+const RateCharacter: RateProps['character'] = ({ index }) => {
+  return customIcons[typeof index !== 'undefined' ? index + 1 : 0];
+}
+
 const { TextArea } = Input;
+const product = productList[randomIntFromInterval(0, 2)];
 
 export const RatingModal = () => {
+  const [starState, setStarState] = useState<number | undefined>();
+  const [comment, setComment] = useState<string>('');
+
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          boxShadow: " 3px 4px 4px rgba(0, 0, 0, 0.25)",
-          background: "#FFFFFF",
-          borderRadius: "10px",
-          padding: "30px 45px",
-          display: "flex",
-          width: "800px",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          gap: "24px",
-        }}
-      >
-        <h2>Ваш отзыв о товаре</h2>
-        <Space
-          style={{
-            display: "flex",
-            gap: "20px",
-            width: "100%",
-          }}
-        >
-          <Image
-            style={{ borderRadius: "50%" }}
-            width={150}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          />
-          <span>Негр, 1.85, Зовут Негр </span>
+    <div className="ratingModal">
+      <div className="productCard">
+        <h2 className="title">Ваш отзыв о <span className="redTitle">товаре</span></h2>
+        <Space className="productDescription">
+          <Image className='imageBox' height={150} width={150} src={product.imgSrc} />
+          <span>{product.productDescription}</span>
         </Space>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: " flex-start",
-            padding: "10px 16px",
-            gap: "8px",
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
-            background: "#EBF1FF",
-          }}
-        >
+        <div className="message">
           <ExclamationCircleOutlined />
           <span>
             Если качество товара вас устроило, можете поставить только оценку
             товара. Остальные поля - не обязательны.
           </span>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "100%",
-            gap: "16px",
-          }}
-        >
-          <h3>Оцените товар</h3>
-          <Rate
-            style={{ fontSize: "44px", color: "#E52C3D" }}
-            defaultValue={3}
-            character={({ index }: any) => customIcons[index + 1]}
-          />
+        <div className="stars">
+          <Rate className="rate" onChange={setStarState} value={starState} character={RateCharacter} />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            gap: "16px",
-          }}
-        >
+        <div className="comment">
           <span>Комментарий</span>
-          <TextArea />
-          <Space size={[0, 16]} wrap>
-            <Tag style={{ color: "black" }} color="#EBF1FF">
-              <span>Гавно</span>
-            </Tag>
-            <Tag style={{ color: "black" }} color="#EBF1FF">
-              processing
-            </Tag>
-            <Tag style={{ color: "black" }} color="#EBF1FF">
-              error
-            </Tag>
-            <Tag style={{ color: "black" }} color="#EBF1FF">
-              warning
-            </Tag>
-            <Tag style={{ color: "black" }} color="#EBF1FF">
-              default
-            </Tag>
+          <TextArea maxLength={255} value={comment} onChange={(e) => setComment(e.target.value)} />
+          <Space style={{ gap: '16px'}} className="commentExample" size={[0, 16]} wrap>
+            {typeof starState === 'number' ? <>
+                {commentExamples[starState]?.map(element => (
+                    <Tag key={element} onClick={(_) => setComment(element)}>
+                      {element}
+                    </Tag>
+                ))}
+            </> : <></>}
           </Space>
-          <div
-            style={{ display: "flex", justifyContent: "flex-end", gap: "16px" }}
-          >
+          <div className="buttonBox">
             <Button>Пропустить</Button>
             <Button>Отправить</Button>
           </div>

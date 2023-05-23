@@ -1,13 +1,12 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
   padding: 16px;
-  background: linear-gradient(180deg, #d3d9e3 0%, rgba(225, 230, 237, 0) 100%)
-    no-repeat;
-}
-
-.container {
-  margin: 0 auto;
-  min-width: 1200px;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: linear-gradient(180deg, rgba(225, 230, 237, 0) 0%, #D3D9E3 100%) no-repeat;
 }
