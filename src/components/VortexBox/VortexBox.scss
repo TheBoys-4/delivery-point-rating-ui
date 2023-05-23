@@ -1,15 +1,16 @@
 #firstVortex {
-    position: absolute;
-    top: 522px;
-    z-index: 1;
-    left: -45px;
+  position: relative;
+  top: 50%;
+  z-index: 1;
+  left: -3vw;
 }
 #secondVortex {
-    position: absolute;
-    top: 765px;
-    z-index: 1;
-    left: 970px;
-    transform: rotate(-60deg);
+  width: 410px;
+  position: relative;
+  top: 50vh;
+  z-index: 1;
+  left: calc(100% - 400px);
+  transform: rotate(-60deg);
 }
 
 .vortexBox {

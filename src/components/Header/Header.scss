@@ -9,9 +9,31 @@
     height: 78px;
   }
   & .tagline {
-    color: #2F3342;
+    color: #2f3342;
     font-size: 32px;
     line-height: 48px;
     font-family: "TT Firs Neue", serif;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .mainHeader {
+    justify-content: center;
+
+    & .tagline {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .mainHeader {
+    & .logo {
+      width: 80%;
+
+      & svg {
+        width: 100%;
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Vortex } from "../../shared/assets";
-import './VortexBox.scss';
+import "./VortexBox.scss";
 
 export const VortexBox: FC = () => {
     return (
