@@ -8,5 +8,13 @@
   width: 100vw;
   height: 100vh;
   position: relative;
-  background: linear-gradient(180deg, rgba(225, 230, 237, 0) 0%, #D3D9E3 100%) no-repeat;
+  background: linear-gradient(180deg, rgba(225, 230, 237, 0) 0%, #d3d9e3 100%)
+    no-repeat;
+  overflow: auto;
+}
+
+@media screen and (max-width: 650px) {
+  .main {
+    padding: 6px;
+  }
 }

@@ -1,15 +1,15 @@
 .title {
   font-weight: bold;
   font-size: 32px;
-  color: #2F3342;
+  color: #2f3342;
   & .redTitle {
-    color: #FF1935;
+    color: #ff1935;
   }
 }
 
 .productCard {
   box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 10px;
   padding: 30px 45px;
   display: flex;
@@ -53,10 +53,10 @@
   padding: 10px 16px;
   gap: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  background: #EBF1FF;
+  background: #ebf1ff;
 
   & svg {
-    fill: #E52C3D;
+    fill: #e52c3d;
     width: 24px;
     height: 24px;
   }
@@ -75,10 +75,10 @@
     margin-inline-end: 0;
   }
   & .ant-rate-star-full svg {
-    color: #E52C3D;
+    color: #e52c3d;
   }
   & .ant-rate-star-zero svg {
-    color: #A19797;
+    color: #a19797;
   }
   & svg {
     font-size: 60px;
@@ -99,7 +99,7 @@
 .commentExample {
   & .ant-tag {
     font-size: 16px;
-    background-color: #EBF1FF;
+    background-color: #ebf1ff;
     height: 100%;
     line-height: 42px;
     border: none;
@@ -120,11 +120,69 @@
     line-height: 21.6px;
     height: 40px;
     border: none;
-    background-color: #E52C3D;
-    color: #FFFFFF;
+    background-color: #e52c3d;
+    color: #ffffff;
     &:hover {
       background-color: #e33748;
-      color: #DEDEDE;
+      color: #dedede;
     }
+  }
+}
+
+@media screen and (min-height: 1300px) {
+  .ratingModal {
+    padding-top: 150px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .ratingModal {
+    padding-top: 50px;
+  }
+  .productCard {
+    width: 90%;
+    gap: 38px;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  .ratingModal {
+    padding-top: 10px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .ratingModal {
+    padding-top: 20px;
+  }
+  .productCard {
+    padding: 20px 10px;
+    align-items: center;
+    width: 97%;
+  }
+  .productDescription {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .stars {
+    gap: 10px;
+
+    & .rate .ant-rate-star {
+      margin-inline-end: 14px;
+    }
+
+    & svg {
+      font-size: 48px;
+    }
+  }
+
+  .buttonBox {
+    padding-top: 24px;
+    justify-content: center;
   }
 }
