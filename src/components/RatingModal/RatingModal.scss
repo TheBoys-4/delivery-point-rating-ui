@@ -1,0 +1,130 @@
+.title {
+  font-weight: bold;
+  font-size: 32px;
+  color: #2F3342;
+  & .redTitle {
+    color: #FF1935;
+  }
+}
+
+.productCard {
+  box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 30px 45px;
+  display: flex;
+  width: 800px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.productDescription {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  & span {
+    font-weight: 500;
+    font-size: 20px;
+  }
+}
+
+.imageBox {
+  border-radius: 50%;
+}
+
+.ratingModal {
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  padding-top: 56px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ant-image-mask {
+  border-radius: 50%;
+}
+
+.message {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px 16px;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: #EBF1FF;
+
+  & svg {
+    fill: #E52C3D;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.stars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+  & .rate .ant-rate-star {
+    margin-inline-end: 40px;
+  }
+  & .rate .ant-rate-star:last-child {
+    margin-inline-end: 0;
+  }
+  & .ant-rate-star-full svg {
+    color: #E52C3D;
+  }
+  & .ant-rate-star-zero svg {
+    color: #A19797;
+  }
+  & svg {
+    font-size: 60px;
+  }
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+  & .ant-input {
+    height: 100px;
+    font-size: 16px;
+  }
+}
+
+.commentExample {
+  & .ant-tag {
+    font-size: 16px;
+    background-color: #EBF1FF;
+    height: 100%;
+    line-height: 42px;
+    border: none;
+    box-shadow: 0 2px 8px 0 #00000026;
+  }
+  & .ant-space-item {
+    height: 42px;
+  }
+}
+
+.buttonBox {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  & > .ant-btn {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 21.6px;
+    height: 40px;
+    border: none;
+    background-color: #E52C3D;
+    color: #FFFFFF;
+    &:hover {
+      background-color: #e33748;
+      color: #DEDEDE;
+    }
+  }
+}
