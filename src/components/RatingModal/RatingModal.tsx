@@ -29,6 +29,12 @@ export const RatingModal = () => {
   const [starState, setStarState] = useState<number | undefined>();
   const [comment, setComment] = useState<string>('');
 
+  const onStarChange: RateProps['onChange'] = (value) => {
+    if (value) {
+      setStarState(value)
+    }
+  }
+
   return (
     <div className="ratingModal">
       <div className="productCard">
@@ -45,7 +51,7 @@ export const RatingModal = () => {
           </span>
         </div>
         <div className="stars">
-          <Rate className="rate" onChange={setStarState} value={starState} character={RateCharacter} />
+          <Rate className="rate" onChange={onStarChange} value={starState} character={RateCharacter} />
         </div>
         <div className="comment">
           <span>Комментарий</span>
