@@ -7,5 +7,17 @@ const instance = axios.create({
 });
 
 export const getMessages = () => {
-  return instance.get("messages");
+  return instance.get("messages").then((res) => res.data);
+};
+
+export const getLocations = () => {
+  return instance.get("locations").then((res) => res.data);
+};
+
+export const getVendors = () => {
+  return instance.get("vendors").then((res) => res.data);
+};
+
+export const sendComment = (data: any) => {
+  return instance.post("messages", data);
 };

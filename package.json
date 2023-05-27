@@ -2,6 +2,7 @@
   "name": "rating-ui",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://87.242.124.151:8080",
   "dependencies": {
     "@ant-design/icons": "^5.1.0",
     "@testing-library/jest-dom": "^5.16.5",
