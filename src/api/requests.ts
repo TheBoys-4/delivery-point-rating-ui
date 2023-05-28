@@ -21,3 +21,18 @@ export const getVendors = () => {
 export const sendComment = (data: any) => {
   return instance.post("messages", data);
 };
+
+export const getXlsx = () => {
+  instance.get('export/xlsx', { responseType: 'blob' }).then((res) => {
+      const href = URL.createObjectURL(res.data);
+
+      const link = document.createElement('a');
+      link.href = href;
+      link.setAttribute('download', 'file.xlsx');
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+  })
+}
