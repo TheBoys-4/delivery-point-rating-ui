@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Space,
   Image,
@@ -65,12 +65,12 @@ interface IRate {
     sex: string;
     age: number;
   };
-  messageType: {
+  messageType?: {
     id: string;
     name: string;
     messageMainType: "RECEIVING_AN_ORDER";
   };
-  messageSource: "TEST";
+  messageSource: string;
   text: string;
 }
 
@@ -87,32 +87,39 @@ export const RatingModal = () => {
       sex: "yes",
       age: 20,
     },
-    messageType: {
-      id: "333",
-      name: "name",
-      messageMainType: "RECEIVING_AN_ORDER",
+    location: {
+      id: "string",
+      administrativeDistrict: "123",
+      district: "12333",
+      address: "555",
+      coordinate: "666",
+      locationType: "77",
     },
-    messageSource: "TEST",
+    vendor: {
+      id: "vendor",
+      name: "vendor-name",
+    },
+    messageSource: "BROWSER",
   });
-
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
-    if (!rating.text) setIsDisabled(true);
+    if (!rating.text && rating.score === 0) setIsDisabled(true);
     else setIsDisabled(false);
   }, [rating]);
 
-  useEffect(() => {
-    const getMes = async () => {
-      const [vendors, locations]: any[] = await Promise.all([
-        getVendors(),
-        getLocations(),
-      ]);
-      console.log(vendors, locations);
-      setRating({ ...rating, vendor: vendors[0], location: locations[0] });
-    };
-    getMes();
-  }, []);
+  // useEffect(() => {
+  //   const getMes = async () => {
+  //     const [vendors, locations]: any[] = await Promise.all([
+  //       getVendors(),
+  //       getLocations(),
+  //     ]);
+  //     console.log(vendors, locations);
+  //     setRating({ ...rating, vendor: vendors[0], location: locations[0] });
+  //   };
+  //   getMes();
+  // }, []);
 
   const onStarChange: RateProps["onChange"] = (value) => {
     if (value) {
@@ -120,29 +127,47 @@ export const RatingModal = () => {
     }
   };
 
-  const openNotification = () => {
+  useEffect(() => {
+    console.log(rating);
+  }, [rating]);
+
+  const onTextChange = (value: string, type?: "TAG") => {
+    if (type === "TAG") {
+      inputRef?.current?.focus();
+      if (rating.text.includes(value)) {
+        setRating({ ...rating, text: rating.text.replace(value, "") });
+      } else {
+        setRating({ ...rating, text: rating.text + value + " " });
+      }
+    } else setRating({ ...rating, text: value });
+  };
+
+  const openNotification = (type: "success" | "error") => {
     notification.open({
-      message: "Отзыв успешно отправлен!",
-      icon: <CheckOutlined style={{ color: "green" }} />,
-      description: "Спасибо за ваш отзыв!",
-      onClick: () => {
-        console.log("Notification Clicked!");
-      },
+      message:
+        type === "success" ? "Отзыв успешно отправлен!" : "Возникла ошибка!",
+      icon:
+        type === "success" ? (
+          <CheckOutlined style={{ color: "green" }} />
+        ) : null,
+      description:
+        type === "success"
+          ? "Спасибо за ваш отзыв!"
+          : "К сожалению, возникла непредвиденная ошибка!",
     });
   };
 
   const sendData = async () => {
     const copy = { ...rating };
-    let tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
-    let localISOTime = new Date(Date.now() - tzoffset)
+    const tzoffset = new Date().getTimezoneOffset() * 60000;
+    const localISOTime = new Date(Date.now() - tzoffset)
       .toISOString()
       .slice(0, -1);
-    console.log(localISOTime);
     copy.dateTime = localISOTime;
     try {
-      sendComment(copy).then(() => openNotification());
+      sendComment(copy).then(() => openNotification("success"));
     } catch (e) {
-      console.log(e);
+      openNotification("error");
     }
   };
 
@@ -181,15 +206,16 @@ export const RatingModal = () => {
             Комментарий <span className="redTitle">*</span>
           </span>
           <TextArea
+            ref={inputRef}
             style={{ resize: "none" }}
             maxLength={255}
-            value={rating?.text}
-            onChange={(e) => setRating({ ...rating, text: e.target.value })}
+            value={rating.text}
+            onChange={(e) => onTextChange(e.target.value)}
           />
           <Space
-            style={{ gap: "16px" }}
+            style={{ gap: "10px" }}
             className="commentExample"
-            size={[0, 16]}
+            size={[0, 4]}
             wrap
           >
             {typeof rating.score === "number" ? (
@@ -198,7 +224,7 @@ export const RatingModal = () => {
                   <Tag
                     style={{ cursor: "pointer" }}
                     key={element}
-                    onClick={(_) => setRating({ ...rating, text: element })}
+                    onClick={(_) => onTextChange(element, "TAG")}
                   >
                     {element}
                   </Tag>
