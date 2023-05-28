@@ -1,9 +1,8 @@
 import axios from "axios";
 import { BASE_URL } from "../shared/constants";
-import { DOMAIN } from "../shared/constants/urls";
 
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? BASE_URL.replace('http://87.242.124.151:8080', DOMAIN) : BASE_URL,
+  baseURL: BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
 
