@@ -32,12 +32,12 @@ const MyAppBar = (props: AppBarProps) => {
 
     return <AppBar {...props}>
         <Upload {...uploadProps}>
-            <Button icon={<UploadOutlined />}>Import</Button>
+            <Button style={{ marginLeft: '16px' }} icon={<UploadOutlined />}>Import</Button>
         </Upload>
-        <Button icon={<DownloadOutlined />} onClick={onDownload}>
+        <Button style={{ marginLeft: '16px' }} icon={<DownloadOutlined />} onClick={onDownload}>
             Download
         </Button>
-        <Button onClick={onGrafana}>
+        <Button style={{ marginLeft: '16px' }} onClick={onGrafana}>
             Grafana
         </Button>
     </AppBar>
