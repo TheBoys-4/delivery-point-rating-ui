@@ -1,4 +1,4 @@
 export const BASE_URL =
-    "api/delivery-point-rating/data-service/";
+    "http://87.242.124.151:8080/api/delivery-point-rating/data-service/";
 
-export const DOMAIN = 'host.docker.internal';
+export const DOMAIN = 'host.docker.internal:3000';
