@@ -78,7 +78,7 @@ export const RatingModal = () => {
   const [rating, setRating] = useState<IRate>({
     id: "1",
     text: "",
-    score: 3,
+    score: 0,
     client: {
       id: "123",
       name: "1",
