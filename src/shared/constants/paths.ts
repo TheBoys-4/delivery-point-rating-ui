@@ -1,3 +1,4 @@
 export const paths = {
-    MAIN: '/'
+    MAIN: '/',
+    ADMIN: '/admin/*'
 }

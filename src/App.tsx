@@ -2,14 +2,15 @@ import React from "react";
 import "./App.css";
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { Rating } from "./pages/Rating";
-import { paths } from "./shared/constants";
+import { paths, roles } from "./shared/constants";
+import { AdminPage } from "./pages/AdminPage";
 
 function App() {
   return (
       <BrowserRouter>
         <Routes>
-            <Route path={paths.MAIN} element={<Rating />} />
-            <Route path="*" element={<div><h1>Страница не найдена</h1></div>} />
+            {roles.user || roles.postomat ?  <Route path={paths.MAIN} element={<Rating />} /> : <></>}
+            {roles.admin ? <Route  path={paths.ADMIN} element={<AdminPage />} /> : <></>}
         </Routes>
       </BrowserRouter>
   );

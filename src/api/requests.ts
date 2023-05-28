@@ -1,8 +1,9 @@
 import axios from "axios";
-import { BASE_URL } from "../const/base";
+import { BASE_URL } from "../shared/constants";
+import { DOMAIN } from "../shared/constants/urls";
 
 const instance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: process.env.NODE_ENV === 'production' ? `${DOMAIN}/${BASE_URL}` : BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
 
