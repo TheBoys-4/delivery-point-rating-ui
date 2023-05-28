@@ -19,12 +19,7 @@ import {
 import "./RatingModal.scss";
 import { commentExamples, productList } from "./constants";
 import { randomIntFromInterval } from "../../shared/helpers";
-import {
-  getLocations,
-  getMessages,
-  getVendors,
-  sendComment,
-} from "../../api/requests";
+import { sendComment } from "../../api/requests";
 
 const customIcons: Record<number, React.ReactNode> = {
   1: <FrownOutlined />,
@@ -42,11 +37,9 @@ const { TextArea } = Input;
 const product = productList[randomIntFromInterval(0, 2)];
 
 interface IRate {
-  id: string;
   dateTime?: string;
   score: number;
   location?: {
-    id: string;
     administrativeDistrict: string;
     district: string;
     address: string;
@@ -54,11 +47,9 @@ interface IRate {
     locationType: string;
   };
   vendor?: {
-    id: string;
     name: string;
   };
   client: {
-    id: string;
     name: string;
     phoneNumber: string;
     email: string;
@@ -76,11 +67,9 @@ interface IRate {
 
 export const RatingModal = () => {
   const [rating, setRating] = useState<IRate>({
-    id: "1",
     text: "",
     score: 0,
     client: {
-      id: "123",
       name: "1",
       phoneNumber: "88005553535",
       email: "email",
@@ -88,15 +77,13 @@ export const RatingModal = () => {
       age: 20,
     },
     location: {
-      id: "string",
       administrativeDistrict: "123",
       district: "12333",
       address: "555",
       coordinate: "666",
-      locationType: "77",
+      locationType: "CITY",
     },
     vendor: {
-      id: "vendor",
       name: "vendor-name",
     },
     messageSource: "BROWSER",
@@ -109,27 +96,11 @@ export const RatingModal = () => {
     else setIsDisabled(false);
   }, [rating]);
 
-  // useEffect(() => {
-  //   const getMes = async () => {
-  //     const [vendors, locations]: any[] = await Promise.all([
-  //       getVendors(),
-  //       getLocations(),
-  //     ]);
-  //     console.log(vendors, locations);
-  //     setRating({ ...rating, vendor: vendors[0], location: locations[0] });
-  //   };
-  //   getMes();
-  // }, []);
-
   const onStarChange: RateProps["onChange"] = (value) => {
     if (value) {
       setRating({ ...rating, score: value });
     }
   };
-
-  useEffect(() => {
-    console.log(rating);
-  }, [rating]);
 
   const onTextChange = (value: string, type?: "TAG") => {
     if (type === "TAG") {
